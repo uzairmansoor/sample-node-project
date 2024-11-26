@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 891377345891.dkr.ecr.us-east-1.amazonaws.com
+      - echo Preparing to build the Docker image...
+
+  build:
+    commands:
+      - echo Building the Docker image...
+      - docker build -t sample-nodejs .
+      - echo Tagging the Docker image...
+      - docker tag sample-nodejs:latest 891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:latest
+
+  post_build:
+    commands:
+      - echo Pushing the Docker image to Amazon ECR...
+      - docker push 891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:latest
+      # - echo Updating ECS service with the new image...
+      # - export TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $ECS_SERVICE_NAME --query taskDefinition.taskDefinitionArn --output text)
+      # - export NEW_IMAGE_URI="891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:latest"
+      # - echo Registering a new ECS task definition...
+      # - aws ecs update-service --cluster $ECS_CLUSTER_NAME --service $ECS_SERVICE_NAME --force-new-deployment
+      # - echo ECS Service updated successfully!
+
+artifacts:
+  files:
+    - "**/*" # Include all files as artifacts
+  discard-paths: yes # Discard paths in artifacts
