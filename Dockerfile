@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json /app
 COPY . /app
 # Install dependencies
-RUN npm install
+RUN npm init -y && npm install express
 
 # Copy the rest of the application files
 COPY . .
