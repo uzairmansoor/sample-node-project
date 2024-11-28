@@ -13,12 +13,12 @@ phases:
       - echo Building the Docker image...
       - docker build -t sample-nodejs .
       - echo Tagging the Docker image...
-      - docker tag sample-nodejs:new 891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:new
+      - docker tag sample-nodejs:latest 891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:latest
 
   post_build:
     commands:
       - echo Pushing the Docker image to Amazon ECR...
-      - docker push 891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:new
+      - docker push 891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:latest
       # - echo Updating ECS service with the new image...
       # - export TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $ECS_SERVICE_NAME --query taskDefinition.taskDefinitionArn --output text)
       # - export NEW_IMAGE_URI="891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:latest"
