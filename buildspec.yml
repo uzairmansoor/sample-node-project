@@ -7,11 +7,13 @@ phases:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 891377345891.dkr.ecr.us-east-1.amazonaws.com
       - echo Preparing to build the Docker image...
       - docker login -u uzairmansoor -p Uzair@123
+      - ls -la
 
   build:
     commands:
       - echo Building the Docker image...
-      - docker build -t sample-nodejs .
+      # - docker build -t sample-nodejs .
+      - docker build --build-arg CUSTOM_MESSAGE="vary_message" -t my-node-app .
       - echo Tagging the Docker image...
       - docker tag sample-nodejs:latest 891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:latest
 
