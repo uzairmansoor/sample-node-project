@@ -8,6 +8,9 @@ phases:
       - echo Preparing to build the Docker image...
       - docker login -u uzairmansoor -p Uzair@123
       - ls -la
+      - cat Dockerfile
+      - sed -i 's|ENV CUSTOM_MESSAGE=".*"|ENV CUSTOM_MESSAGE="vary_message"|' Dockerfile
+      - cat Dockerfile
 
   build:
     commands:
