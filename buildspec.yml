@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  variables:
+    APP_ID: "13262187"  # Set your APP_ID value here
+
 phases:
   pre_build:
     commands:
@@ -9,14 +13,13 @@ phases:
       - docker login -u uzairmansoor -p Uzair@123
       - ls -la
       - cat Dockerfile
-      - sed -i 's|ENV APP_ID=".*"|ENV APP_ID="13262187"|' Dockerfile
+      - sed -i 's|ENV APP_ID=".*"|ENV APP_ID="$APP_ID"|' Dockerfile  # Use the APP_ID environment variable
       - cat Dockerfile
 
   build:
     commands:
       - echo Building the Docker image...
-      # - docker build -t sample-nodejs .
-      - docker build --build-arg APP_ID="vary_message" -t sample-nodejs .
+      - docker build -t sample-nodejs .
       - echo Tagging the Docker image...
       - docker tag sample-nodejs:latest 891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:latest
 
