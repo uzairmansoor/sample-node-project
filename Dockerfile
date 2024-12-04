@@ -33,8 +33,7 @@ COPY . /app
 RUN npm init -y && npm install express
 
 # Set environment variables
-ENV APP_VERSION="1.0.0"
-ENV CUSTOM_MESSAGE="Welcome to My Node.js App!"
+ENV APP_ID="123"
 
 # Copy the rest of the application files
 COPY . .

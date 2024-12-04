@@ -15,12 +15,10 @@ const express = require("express");
 const app = express();
 
 // Use environment variables or set defaults
-const version = process.env.APP_VERSION || "Unknown Version";
-const message = process.env.CUSTOM_MESSAGE || "No custom message set.";
+const version = process.env.APP_ID || "Unknown Version";
 
 app.get("/", (req, res) => {
   res.send(`
-    <h1>${message}</h1>
     <p>App Version: ${version}</p>
   `);
 });

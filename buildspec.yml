@@ -9,14 +9,14 @@ phases:
       - docker login -u uzairmansoor -p Uzair@123
       - ls -la
       - cat Dockerfile
-      - sed -i 's|ENV CUSTOM_MESSAGE=".*"|ENV CUSTOM_MESSAGE="vary_message"|' Dockerfile
+      - sed -i 's|ENV APP_ID=".*"|ENV APP_ID="13262187"|' Dockerfile
       - cat Dockerfile
 
   build:
     commands:
       - echo Building the Docker image...
       # - docker build -t sample-nodejs .
-      - docker build --build-arg CUSTOM_MESSAGE="vary_message" -t sample-nodejs .
+      - docker build --build-arg APP_ID="vary_message" -t sample-nodejs .
       - echo Tagging the Docker image...
       - docker tag sample-nodejs:latest 891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:latest
 
