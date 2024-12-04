@@ -14,7 +14,9 @@ phases:
       - docker login -u uzairmansoor -p Uzair@123
       - ls -la
       - cat Dockerfile
-      - sed -i 's|ENV APP_ID=".*"|ENV APP_ID="$APP_ID"|' Dockerfile  # Use the APP_ID environment variable
+      - echo $APP_ID
+      - sed -i "s|ENV APP_ID=\".*\"|ENV APP_ID=\"$APP_ID\"|" Dockerfile
+      #- sed -i 's|ENV APP_ID=".*"|ENV APP_ID="$APP_ID"|' Dockerfile  # Use the APP_ID environment variable
       - cat Dockerfile
 
   build:
@@ -28,12 +30,6 @@ phases:
     commands:
       - echo Pushing the Docker image to Amazon ECR...
       - docker push $IMAGE_URI
-      # - echo Updating ECS service with the new image...
-      # - export TASK_DEFINITION=$(aws ecs describe-task-definition --task-definition $ECS_SERVICE_NAME --query taskDefinition.taskDefinitionArn --output text)
-      # - export NEW_IMAGE_URI="891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:latest"
-      # - echo Registering a new ECS task definition...
-      # - aws ecs update-service --cluster $ECS_CLUSTER_NAME --service $ECS_SERVICE_NAME --force-new-deployment
-      # - echo ECS Service updated successfully!
 
 artifacts:
   files:
