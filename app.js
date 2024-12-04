@@ -15,7 +15,7 @@ const express = require("express");
 const app = express();
 
 // Use environment variables or set defaults
-const version = process.env.APP_ID || "Unknown Version";
+const version = process.env.APP_ID;
 
 app.get("/", (req, res) => {
   res.send(`
