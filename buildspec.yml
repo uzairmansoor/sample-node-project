@@ -4,6 +4,7 @@ env:
   variables:
     APP_ID: "13262187"  # Set your APP_ID value here
     IMAGE_URI: "891377345891.dkr.ecr.us-east-1.amazonaws.com/sample-nodejs:latest"
+    ECR_NAME: "sample-nodejs"
 
 phases:
   pre_build:
@@ -22,9 +23,9 @@ phases:
   build:
     commands:
       - echo Building the Docker image...
-      - docker build -t sample-nodejs .
+      - docker build -t $ECR_NAME .
       - echo Tagging the Docker image...
-      - docker tag sample-nodejs:latest $IMAGE_URI
+      - docker tag $ECR_NAME:latest $IMAGE_URI
 
   post_build:
     commands:
